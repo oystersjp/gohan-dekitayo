@@ -1,9 +1,11 @@
 const Discord = require("discord.js")//todo:import文を使う
 import { IncomingWebhook } from "@slack/webhook";
 import { VoiceState } from "discord.js";
+import dotenv from "dotenv";
+dotenv.config();
 
 const client = new Discord.Client();
-const DISCODE_TOKEN = process.env.DISCODE_TOKEN;
+const DISCODE_TOKEN = process.env.DISCODE_TOKEN as string;
 const SLACK_WEBHOOK = process.env.SLACK_WEBHOOK as string;
 
 const webhook = new IncomingWebhook(SLACK_WEBHOOK);
