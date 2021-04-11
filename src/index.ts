@@ -1,1 +1,25 @@
-console.log('Thanks!')
+const Discord = require("discord.js")//todo:import文を使う
+import { IncomingWebhook }  from "@slack/webhook";
+import { VoiceState } from "discord.js";
+
+const client = new Discord.Client();
+const DISCODE_TOKEN = " ";
+
+client.on("ready", () => {
+	console.log("ready...");
+  });
+  
+  client.on("message", (msg: { content: string; reply: (arg0: string) => void; }) => {
+	if (msg.content === "ping") {
+	  msg.reply("Pong!");
+	}
+  });
+  client.on("voiceStateUpdate", async (oldState: VoiceState, newState: VoiceState) =>  {
+	if(oldState.channel?.members.size === undefined && newState.channel?.members.size === 1) {
+		// User Joins a voice channel
+		// @ts-ignore　
+		console.log('もしもし、' + newState.channel?.members.toJSON()[0].displayName + " 今discordにいるの")
+	 }
+  })
+
+client.login(DISCODE_TOKEN)

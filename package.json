@@ -18,5 +18,9 @@
   "homepage": "https://github.com/oystersjp/gohan-dekitayo#readme",
   "devDependencies": {
     "typescript": "^4.2.4"
+  },
+  "dependencies": {
+    "@slack/webhook": "^6.0.0",
+    "discord.js": "^12.5.3"
   }
 }
