@@ -3,8 +3,8 @@ import { IncomingWebhook } from "@slack/webhook";
 import { VoiceState } from "discord.js";
 
 const client = new Discord.Client();
-const DISCODE_TOKEN = "";
-const SLACK_WEBHOOK = "";
+const DISCODE_TOKEN = process.env.DISCODE_TOKEN;
+const SLACK_WEBHOOK = process.env.SLACK_WEBHOOK as string;
 
 const webhook = new IncomingWebhook(SLACK_WEBHOOK);
 
