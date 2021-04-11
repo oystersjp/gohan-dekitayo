@@ -1,0 +1,22 @@
+{
+  "name": "gohan-dekitayo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oystersjp/gohan-dekitayo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/oystersjp/gohan-dekitayo/issues"
+  },
+  "homepage": "https://github.com/oystersjp/gohan-dekitayo#readme",
+  "devDependencies": {
+    "typescript": "^4.2.4"
+  }
+}
