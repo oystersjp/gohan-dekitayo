@@ -1,1 +1,1 @@
-web: npm link typescript && npx ts-node ./src/index.ts
+worker: npm link typescript && npx ts-node ./src/index.ts
