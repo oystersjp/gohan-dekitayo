@@ -38,8 +38,7 @@ client.on(
       (async () => {
         const displayName = newMember.first()?.displayName;
         await webhook.send({
-          text: `もしもし私 ${displayName}、
-今discordにいるの`,
+          text: `${displayName} < :slack_call: :watashi: :discord: :now: :in: ${newState.channel?.name}`,
         });
       })();
     }
