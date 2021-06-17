@@ -33,7 +33,6 @@ client.on(
       // User Joins a voice channel
       (async () => {
         await webhook.send({
-          // @ts-ignore
           text: `${
             newState.channel?.members.toJSON()[0].displayName
           } < :slack_call: :watashi:  :in: :discord: :now:`,
