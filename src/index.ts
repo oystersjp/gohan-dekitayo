@@ -1,4 +1,4 @@
-const Discord = require("discord.js")//todo:import文を使う
+const Discord = require("discord.js"); //todo:import文を使う
 import { IncomingWebhook } from "@slack/webhook";
 import { VoiceState } from "discord.js";
 import dotenv from "dotenv";
@@ -11,26 +11,39 @@ const SLACK_WEBHOOK = process.env.SLACK_WEBHOOK as string;
 const webhook = new IncomingWebhook(SLACK_WEBHOOK);
 
 client.on("ready", () => {
-	console.log("ready...");
+  console.log("ready...");
 });
 
-client.on("message", (msg: { content: string; reply: (arg0: string) => void; }) => {
-	if (msg.content === "ping") {
-		msg.reply("Pong!");
-	}
-});
+client.on(
+  "message",
+  (msg: { content: string; reply: (arg0: string) => void }) => {
+    if (msg.content === "ping") {
+      msg.reply("Pong!");
+    }
+  }
+);
 
-client.on("voiceStateUpdate", async (oldState: VoiceState, newState: VoiceState) => {
-	if (oldState.channel?.members.size === undefined && newState.channel?.members.size === 1) {
-		// User Joins a voice channel
-		(async () => {
-			const displayName = newState.channel?.members.first()?.displayName
-			await webhook.send({
-				text: `もしもし私 ${displayName}、
-今discordにいるの`
-			});
-		})();
-	};
-});
+client.on(
+  "voiceStateUpdate",
+  async (oldState: VoiceState, newState: VoiceState) => {
+    if (oldState.channel === null || newState.channel === null) {
+      return;
+    }
+
+    const oldMember = oldState.channel.members;
+    const newMember = newState.channel.members;
+
+    if (oldMember.size === undefined && newMember.size === 1) {
+      // User Joins a voice channel
+      (async () => {
+        const displayName = newMember.first()?.displayName;
+        await webhook.send({
+          text: `もしもし私 ${displayName}、
+今discordにいるの`,
+        });
+      })();
+    }
+  }
+);
 
 client.login(DISCODE_TOKEN);
