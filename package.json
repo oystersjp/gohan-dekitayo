@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "ts-node src/index.ts",
-    "test:type": "tsc --build tsconfig.json --noEmit"
+    "test:type": "tsc --noEmit"
   },
   "repository": {
     "type": "git",
