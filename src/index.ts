@@ -1,6 +1,5 @@
-const Discord = require("discord.js")//todo:import文を使う
+import Discord from 'discord.js'
 import { IncomingWebhook } from "@slack/webhook";
-import { VoiceState } from "discord.js";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -14,13 +13,13 @@ client.on("ready", () => {
 	console.log("ready...");
 });
 
-client.on("message", (msg: { content: string; reply: (arg0: string) => void; }) => {
+client.on("message", msg => {
 	if (msg.content === "ping") {
 		msg.reply("Pong!");
 	}
 });
 
-client.on("voiceStateUpdate", async (oldState: VoiceState, newState: VoiceState) => {
+client.on("voiceStateUpdate", async (oldState, newState) => {
 	if (oldState.channel?.members.size === undefined && newState.channel?.members.size === 1) {
 		// User Joins a voice channel
 		(async () => {
