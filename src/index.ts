@@ -4,8 +4,8 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const client = new Discord.Client();
-const DISCODE_TOKEN = process.env.DISCODE_TOKEN as string;
-const SLACK_WEBHOOK = process.env.SLACK_WEBHOOK as string;
+const DISCODE_TOKEN = process.env.DISCODE_TOKEN;
+const SLACK_WEBHOOK = process.env.SLACK_WEBHOOK;
 
 const webhook = new IncomingWebhook(SLACK_WEBHOOK);
 
