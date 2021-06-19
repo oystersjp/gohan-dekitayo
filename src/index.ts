@@ -22,13 +22,11 @@ client.on("message", msg => {
 client.on("voiceStateUpdate", async (oldState, newState) => {
 	if (oldState.channel?.members.size === undefined && newState.channel?.members.size === 1) {
 		// User Joins a voice channel
-		(async () => {
-			const displayName = newState.channel?.members.first()?.displayName
-			await webhook.send({
-				text: `もしもし私 ${displayName}、
+		const displayName = newState.channel?.members.first()?.displayName
+		await webhook.send({
+			text: `もしもし私 ${displayName}、
 今discordにいるの`
-			});
-		})();
+		});
 	};
 });
 
