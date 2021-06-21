@@ -22,10 +22,30 @@ client.on("message", msg => {
 client.on("voiceStateUpdate", async (oldState, newState) => {
 	if (oldState.channel?.members.size === undefined && newState.channel?.members.size === 1) {
 		// User Joins a voice channel
-		const displayName = newState.channel?.members.first()?.displayName
+		const member = newState.channel?.members.first()
+		if (!member) {
+			return
+		}
+
+		const { channel, guild } = newState
+
 		await webhook.send({
-			text: `もしもし私 ${displayName}、
-今discordにいるの`
+			blocks: [
+				{
+					type: 'context',
+					elements: [
+						{
+							type: 'image',
+							image_url: member.user.displayAvatarURL({ size: 128, format: 'png' }) || '',
+							alt_text: member.displayName,
+						},
+						{
+							type: 'mrkdwn',
+							text: `＜ :slack_call: :watashi: :discord: :now: :in: <https://discord.com/channels/${guild.id}|#${channel.name}>`,
+						}
+					]
+				}
+			]
 		});
 	};
 });
