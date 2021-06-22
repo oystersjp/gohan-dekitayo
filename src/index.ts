@@ -41,7 +41,7 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
 						},
 						{
 							type: 'mrkdwn',
-							text: `＜ :slack_call: :watashi: :discord: :now: :in: <https://discord.com/channels/${guild.id}|#${channel.name}>`,
+							text: `＜ :slack_call: :watashi: :discord: :in: <https://discord.com/channels/${guild.id}|#${channel.name}> :now:`,
 						}
 					]
 				}
