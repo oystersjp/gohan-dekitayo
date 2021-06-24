@@ -33,17 +33,11 @@ const sendStartingSessionMessage = (
   })
 }
 
-const getCountOfHuman = ({ channel }: VoiceState): number => {
-  return channel?.members
-    ? channel.members.filter((member) => !member.user.bot).size
-    : 0
-}
-
 export const create: (webhook: IncomingWebhook) => voiceStateUpdateHandler = (
   webhook
 ) => {
   return async (before: VoiceState, after: VoiceState) => {
-    if (getCountOfHuman(after) === 1 && after.channel) {
+    if (!before.channel && after.channel?.members.size === 1) {
       return sendStartingSessionMessage(webhook, {
         channel: after.channel,
         guild: after.guild,
