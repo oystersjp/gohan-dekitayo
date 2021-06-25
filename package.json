@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "ts-node --files src/index.ts",
+    "start": "ts-node --files src/index",
+    "dev": "ts-node-dev --files src/index",
     "test:type": "tsc --noEmit",
     "lint": "prettier --check .",
     "fmt": "prettier --write ."
@@ -28,6 +29,7 @@
     "typescript": "^4.2.4"
   },
   "devDependencies": {
-    "prettier": "^2.3.1"
+    "prettier": "^2.3.1",
+    "ts-node-dev": "^1.1.6"
   }
 }

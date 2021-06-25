@@ -7,6 +7,7 @@ Discord のサーバーにあるボイスチャンネルに誰かが入室した
 1. Discord の Bot トークンを取得
 2. Slack の Incoming Webhook URL を取得
 3. `.env.default` をコピーして `.env` を作り `DISCORD_TOKEN` と `SLACK_WEBHOOK` を設定
+4. `npm run dev` を実行
 
 ### Discord Bot トークンの取得方法
 
