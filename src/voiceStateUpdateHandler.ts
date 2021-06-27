@@ -38,7 +38,7 @@ const isAfkChannel = ({ guild, channel }: VoiceState): boolean => {
 }
 
 const isStartCall = (beforeCh: VoiceChannel | null, afterCh: VoiceChannel| null) => {
-  return !beforeCh && afterCh.members.size === 1;
+  return !beforeCh && afterCh?.members.size === 1;
 }
 
 export const create: (webhook: IncomingWebhook) => voiceStateUpdateHandler = (
