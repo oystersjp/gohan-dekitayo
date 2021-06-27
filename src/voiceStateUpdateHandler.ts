@@ -37,7 +37,7 @@ const isAfkChannel = ({ guild, channel }: VoiceState): boolean => {
   return guild.afkChannelID === channel?.id
 }
 
-const isActiveCall = (beforeCh: VoiceChannel | null, afterCh: VoiceChannel| null) => {
+const isStartCall = (beforeCh: VoiceChannel | null, afterCh: VoiceChannel| null) => {
   return !beforeCh && afterCh.members.size === 1;
 }
 
@@ -46,7 +46,7 @@ export const create: (webhook: IncomingWebhook) => voiceStateUpdateHandler = (
 ) => {
   return async (before: VoiceState, after: VoiceState) => {
     if (
-      isActiveCall(before.channel, after.channel)&&
+      isStartCall(before.channel, after.channel)&&
       !isAfkChannel(after)
     ) {
       return sendStartingSessionMessage(webhook, {
