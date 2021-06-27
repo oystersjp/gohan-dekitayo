@@ -33,11 +33,19 @@ const sendStartingSessionMessage = (
   })
 }
 
+const isAfkChannel = ({ guild, channel }: VoiceState): boolean => {
+  return guild.afkChannelID === channel?.id
+}
+
 export const create: (webhook: IncomingWebhook) => voiceStateUpdateHandler = (
   webhook
 ) => {
   return async (before: VoiceState, after: VoiceState) => {
-    if (!before.channel && after.channel?.members.size === 1) {
+    if (
+      !before.channel &&
+      after.channel?.members.size === 1 &&
+      !isAfkChannel(after)
+    ) {
       return sendStartingSessionMessage(webhook, {
         channel: after.channel,
         guild: after.guild,
