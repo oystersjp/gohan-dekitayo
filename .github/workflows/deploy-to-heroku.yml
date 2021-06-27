@@ -13,5 +13,8 @@ jobs:
       - uses: akhileshns/heroku-deploy@v3.8.8
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: 'gohan-dekitayo'
+          heroku_app_name: 'gohan-dekitayo' #セルフホスティングをする場合はこの名前を変更する
           heroku_email: ${{secrets.HEROKU_EMAIL}}
+        env:
+          DISCORD_TOKEN: ${{secrets.DISCORD_TOKEN}}
+          SLACK_WEBHOOK: ${{secrets.SLACK_WEBHOOK}}
