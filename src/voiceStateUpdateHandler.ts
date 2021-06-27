@@ -1,5 +1,5 @@
 import { IncomingWebhook } from '@slack/webhook'
-import Discord, { VoiceState } from 'discord.js'
+import Discord, { VoiceChannel, VoiceState } from 'discord.js'
 
 type voiceStateUpdateHandler = Parameters<Discord.Client['on']>[1]
 
@@ -33,11 +33,22 @@ const sendStartingSessionMessage = (
   })
 }
 
+const isAfkChannel = ({ guild, channel }: VoiceState): boolean => {
+  return guild.afkChannelID === channel?.id
+}
+
+const isActiveCall = (beforeCh: VoiceChannel | null, afterCh: VoiceChannel| null) => {
+  return !beforeCh && afterCh.members.size === 1;
+}
+
 export const create: (webhook: IncomingWebhook) => voiceStateUpdateHandler = (
   webhook
 ) => {
   return async (before: VoiceState, after: VoiceState) => {
-    if (!before.channel && after.channel?.members.size === 1) {
+    if (
+      isActiveCall(before.channel, after.channel)&&
+      !isAfkChannel(after)
+    ) {
       return sendStartingSessionMessage(webhook, {
         channel: after.channel,
         guild: after.guild,
