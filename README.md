@@ -28,3 +28,11 @@ Discord のサーバーにあるボイスチャンネルに誰かが入室した
 ## デプロイ方法
 
 `master` に push すると自動的にデプロイされます。
+
+## セルフホスティング方法
+
+1. heroku のアカウントを作る
+1. この repository を fork する
+1. fork した repository の github secret に HEROKU_API_KEY, HEROKU_EMAIL, DISCORD_TOKEN, SLACK_WEBHOOK を設定する
+1. heroku_app_name(https://github.com/oystersjp/gohan-dekitayo/blob/c8dbf9937f954baf3d832408751527b1b9e089dc/.github/workflows/deploy-to-heroku.yml#L16)を変更する
+1. 変更を master へ push し、deploy の github action を実行させる
