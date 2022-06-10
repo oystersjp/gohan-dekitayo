@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "ts-node --files src/index",
+    "build": "tsc --build",
+    "start": "node dist",
     "dev": "ts-node-dev --files src/index",
     "test:type": "tsc --noEmit",
     "lint": "prettier --check .",

@@ -15,4 +15,5 @@ jobs:
           node-version: 14.15.4
       - run: npm ci
       - run: npm run lint
+      - run: npm run build
       - run: npm run test:type
