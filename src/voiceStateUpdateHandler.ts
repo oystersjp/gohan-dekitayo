@@ -25,7 +25,7 @@ const sendStartingSessionMessage = (
           },
           {
             type: 'mrkdwn',
-            text: `＜ :slack_call: :watashi: :discord: :in: <https://discord.com/channels/${guild.id}|#${channel.name}> :now:`,
+            text: `＜ :slack_call: :watashi: :in: <https://discord.com/channels/${guild.id}|#${channel.name}> :in: :discord: :now:`,
           },
         ],
       },
