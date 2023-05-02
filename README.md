@@ -31,8 +31,43 @@ Discord のサーバーにあるボイスチャンネルに誰かが入室した
 
 ## セルフホスティング方法
 
-1. heroku のアカウントを作る
-1. この repository を fork する
-1. fork した repository の github secret に HEROKU_API_KEY, HEROKU_EMAIL, DISCORD_TOKEN, SLACK_WEBHOOK を設定する
-1. heroku_app_name(https://github.com/oystersjp/gohan-dekitayo/blob/c8dbf9937f954baf3d832408751527b1b9e089dc/.github/workflows/deploy-to-heroku.yml#L16)を変更する
-1. 変更を master へ push し、deploy の github action を実行させる
+1. fly のアカウントを作る
+2. この repository を fork する
+3. Local PC で flyctl コマンドを使って環境変数を設定する(FYI: [Hands-on with Fly.io](https://fly.io/docs/hands-on/install-flyctl/))
+
+```sh
+$ brew install flyctl
+$ flyctl auth login
+$ flyctl launch
+Creating app in /Users/misato/ghq/github.com/oystersjp/gohan-dekitayo
+An existing fly.toml file was found for app gohan-dekitayo
+? Would you like to copy its configuration to the new app? Yes
+Scanning source code
+Detected a Dockerfile app
+? Choose an app name (leaving blank will default to 'gohan-dekitayo')
+? Select Organization: oysters (oysters)
+App will use 'nrt' region as primary
+Created app 'gohan-dekitayo' in organization 'oysters'
+Admin URL: https://fly.io/apps/gohan-dekitayo
+Hostname: gohan-dekitayo.fly.dev
+? Would you like to set up a Postgresql database now? No
+? Would you like to set up an Upstash Redis database now? No
+Wrote config file fly.toml
+? Would you like to deploy now? No
+Validating /Users/misato/ghq/github.com/oystersjp/gohan-dekitayo/fly.toml
+Platform: machines
+✓ Configuration is valid
+Your app is ready! Deploy with `flyctl deploy`
+$ flyctl secrets set DISCODE_TOKEN=<your-discord-token>
+$ flyctl secrets set SLACK_WEBHOOK=<your-slack-webhook>
+$ flyctl scale count 1 # 通知が二重で届く場合は実行してください
+$ flyctl deploy
+```
+
+4. 以下のコマンドを実行して、token を発行する。fork した repository の GitHub Actions secrets に FLY_API_TOKEN として値を設定する
+
+```sh
+$ flyctl tokens create deploy -x 999999h | pbcopy
+```
+
+5. 変更を master へ push し、deploy の github action を実行させる
