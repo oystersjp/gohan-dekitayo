@@ -1,0 +1,13 @@
+# fly.toml app configuration file generated for gohan-dekitayo on 2023-05-02T19:00:42+09:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "gohan-dekitayo"
+primary_region = "nrt"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = false
+  auto_start_machines = false
