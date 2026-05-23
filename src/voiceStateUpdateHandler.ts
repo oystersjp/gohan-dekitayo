@@ -5,7 +5,10 @@ type voiceStateUpdateHandler = Parameters<Discord.Client['on']>[1]
 
 const sendStartingSessionMessage = (
   webhook: IncomingWebhook,
-  { channel, guild }: { channel: Discord.VoiceChannel; guild: Discord.Guild }
+  {
+    channel,
+    guild,
+  }: { channel: Discord.VoiceBasedChannel; guild: Discord.Guild }
 ) => {
   const member = channel.members.first()
   if (!member) {
@@ -20,7 +23,8 @@ const sendStartingSessionMessage = (
           {
             type: 'image',
             image_url:
-              member.user.displayAvatarURL({ size: 128, format: 'png' }) || '',
+              member.user.displayAvatarURL({ size: 128, extension: 'png' }) ||
+              '',
             alt_text: member.displayName,
           },
           {
@@ -34,7 +38,7 @@ const sendStartingSessionMessage = (
 }
 
 const isAfkChannel = ({ guild, channel }: VoiceState): boolean => {
-  return guild.afkChannelID === channel?.id
+  return guild.afkChannelId === channel?.id
 }
 
 export const create: (webhook: IncomingWebhook) => voiceStateUpdateHandler = (
